@@ -9,7 +9,7 @@
     group: root
 
 - name: wget 
-  command: "wget {{pvt_downlo ad_link}} -P {{download_dir}}"
+  command: "wget {{pvt_download_link}} -P {{download_dir}}"
 
 - name: Extract Java archive
   command: "tar -xvzf {{download_dir}}/jdk-8u271-linux-x64.tar.gz -C {{jvm_home}}"
