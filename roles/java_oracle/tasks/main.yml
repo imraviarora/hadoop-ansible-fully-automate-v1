@@ -30,8 +30,8 @@
     regexp: '^PATH'
     line: "{{ item }}"
   with_items:
-    - 'JAVA_HOME=/usr/lib/jvm/{{jdk_version}}'
-    - 'JRE_HOME=/usr/lib/jvm/{{jdk_version}}'
+    - 'JAVA_HOME={{jvm_home}}/{{jdk_version}}'
+    - 'JRE_HOME={{jvm_home}}/{{jdk_version}}'
     - 'PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin:$HOME/bin'
 
 - name: Insert export line
@@ -46,7 +46,7 @@
 
 - name: Copy bash_profile to hadoop user
   copy:
-    src: /root/{{user}}/.bash_profile
+    src: /root/.bash_profile
     dest: /home/{{user}}
     owner: "{{user}}"
     group: "{{user}}"
@@ -58,9 +58,3 @@
 - name: Source the hadoop bash_profile
   remote_user: "{{user}}"
   shell: source /home/{{user}}/.bash_profile
-
-- name: Check Java Home
-  shell: echo $JAVA_HOME;
-
-- name: Check Java Version
-  shell: java -version;
