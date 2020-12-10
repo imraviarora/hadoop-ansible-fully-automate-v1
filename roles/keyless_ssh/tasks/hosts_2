@@ -1,0 +1,14 @@
+[local_host]
+localhost ansible_port=22 ansible_user=hadoop ansible_password=test@123 ansible_host=10.128.0.21
+
+
+[local_host:vars]
+ssh_key_filename="id_rsa"
+remote_machine_username="hadoop"
+remote_machine_password="test@123"
+
+
+[ansible_setup_passwordless_setup_group]
+mn1 ansible_port=22 ansible_user=hadoop ansible_host=10.128.0.21
+dn1 ansible_port=22 ansible_user=hadoop ansible_host=10.128.0.22
+dn2 ansible_port=22 ansible_user=hadoop ansible_host=10.128.0.23

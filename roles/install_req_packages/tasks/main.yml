@@ -1,0 +1,13 @@
+---
+- name: Install all required packages
+  yum:
+    name: '{{ item }}'
+    state: present
+    update_cache: True
+  with_items:
+    - wget
+    - vim 
+    - openssl-* 
+    - net-tools 
+    - unzip 
+    - git

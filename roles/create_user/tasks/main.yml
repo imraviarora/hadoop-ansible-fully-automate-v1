@@ -1,0 +1,6 @@
+---
+- name: Create Hadoop User
+  user: name={{user}} password={{user_hashcode_credentials}}
+  # password is test@123
+  # command to generate hashcode is given below
+  # python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'

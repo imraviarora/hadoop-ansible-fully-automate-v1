@@ -1,0 +1,3 @@
+---
+- name: Copy slaves with workers ip
+  template: src=slaves dest={{ hadoop_config_path }} mode=644 owner={{ user }} group = {{ group }}

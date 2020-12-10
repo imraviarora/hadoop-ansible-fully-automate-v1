@@ -1,0 +1,9 @@
+- hosts: all 
+  remote_user: root
+  vars_files:
+   - vars/user.yml
+   - vars/var_basic.yml
+   - vars/var_master.yml
+  roles:
+    - install_req_packages
+    - java_oracle

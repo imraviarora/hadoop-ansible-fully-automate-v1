@@ -1,0 +1,66 @@
+---
+- name: Create a Directory for Java
+  become: yes
+  file:
+    path: "{{ jvm_home }}"
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+
+- name: wget 
+  command: "wget {{pvt_downlo ad_link}} -P {{download_dir}}"
+
+- name: Extract Java archive
+  command: "tar -xvzf {{download_dir}}/jdk-8u271-linux-x64.tar.gz -C {{jvm_home}}"
+
+- name: Fix ownership 
+  file: "state=directory path={{jvm_home}} owner={{user}} group={{user}} recurse=yes mode=0755"
+   
+- name: Remove export line
+  lineinfile:
+    path: /root/.bash_profile
+    state: absent
+    regexp: '^export'
+
+- name: Adding the path in the bashrc files
+  lineinfile:
+    path: /root/.bash_profile
+    state: present
+    regexp: '^PATH'
+    line: "{{ item }}"
+  with_items:
+    - 'JAVA_HOME=/usr/lib/jvm/{{jdk_version}}'
+    - 'JRE_HOME=/usr/lib/jvm/{{jdk_version}}'
+    - 'PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin:$HOME/bin'
+
+- name: Insert export line
+  lineinfile:
+    path: /root/.bash_profile
+    line: 'export PATH'
+
+- name: Remove hadoop user bash_profile
+  file:
+    path: /home/{{user}}/.bash_profile
+    state: absent
+
+- name: Copy bash_profile to hadoop user
+  copy:
+    src: /root/{{user}}/.bash_profile
+    dest: /home/{{user}}
+    owner: "{{user}}"
+    group: "{{user}}"
+    mode: '0644'
+
+- name: Source the root bash_profile 
+  shell: source /root/.bash_profile
+
+- name: Source the hadoop bash_profile
+  remote_user: "{{user}}"
+  shell: source /home/{{user}}/.bash_profile
+
+- name: Check Java Home
+  shell: echo $JAVA_HOME;
+
+- name: Check Java Version
+  shell: java -version;
