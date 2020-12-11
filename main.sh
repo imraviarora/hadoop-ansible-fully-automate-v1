@@ -23,4 +23,4 @@ ansible-playbook -i hosts/host master.yml
 echo -e "\n---------------------------------------------------------------------------------------------------------------------------\n"
 echo -e "JOINING\tWORKER\tNODES"
 echo -e "\n---------------------------------------------------------------------------------------------------------------------------\n"
-ansible-playbook -i hosts/host workers.yml -e "master_ip=${NODE_PVT_IP} master_hostname=${HOSTNAME}"
+ansible-playbook -i hosts/host workers.yml -e "master_ip=${HOSTNAME} master_hostname=${HOSTNAME}"
