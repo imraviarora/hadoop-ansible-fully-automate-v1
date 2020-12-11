@@ -12,17 +12,9 @@
 #
 # ansible-playbook -i hosts ansible_setup_passwordless_ssh.yml
 #
+#
+#
 ---
-- hosts: ansible_setup_passwordless_setup_group
-  vars: 
-    # password is test@123
-    # command to generate hashcode is given below
-    # python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
-    password: $6$GZWgyu5SXBkFqO/Q$Mx5keaawrOpJwRagT3Y9WWHbyLcC4cTKhduJiaItpVB2nsZsoXfuCUATa2GHUF9lmNcQOYqy.q0Xh0xidUlBG0
-  tasks:
-    - name: Create user hadoop
-      user: name=hadoop password={{password}}
-
 - hosts: local_host
   gather_facts: false
   tasks:
@@ -121,8 +113,16 @@
 
 - hosts: ansible_setup_passwordless_setup_group
   gather_facts: false
+  vars: 
+    # password is test@123
+    # command to generate hashcode is given below
+    # python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
+    password: $6$GZWgyu5SXBkFqO/Q$Mx5keaawrOpJwRagT3Y9WWHbyLcC4cTKhduJiaItpVB2nsZsoXfuCUATa2GHUF9lmNcQOYqy.q0Xh0xidUlBG0
   
   tasks:
+    - name: Create user hadoop
+      user: name=hadoop password={{password}}
+
     - name: check ssh to remote hosts works
       shell: "hostname; id"
       register: ssh_connection_test

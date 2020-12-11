@@ -58,3 +58,9 @@
 - name: Source the hadoop bash_profile
   remote_user: "{{user}}"
   shell: source /home/{{user}}/.bash_profile
+
+- name: Copy Java Home Script
+  template: src=java_home.sh dest=/etc/profile.d
+
+- name: Set Java Home Script
+  shell: source /etc/profile.d/java_home.sh

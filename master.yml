@@ -12,10 +12,10 @@
      install_hadoop: true
      config_hadoop: true
   roles:
-    #- create_user
+    #- create_user p[create user will done during keyless]
     - user
     - fetch_public_key
     - authorized
     - download_hadoop_targz
-    #- java
+    #- java  [this is open jdk java]
     - hadoop

@@ -7,3 +7,4 @@
   roles:
     - install_req_packages
     - java_oracle
+    - create_user
