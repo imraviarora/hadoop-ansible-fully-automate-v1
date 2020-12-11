@@ -127,3 +127,29 @@ firewall_ports:
   - "{{ yarn_resourcemanager_webapp_port }}"
   - "{{ yarn_resourcemanager_tracker_port }}"
   - "{{ yarn_resourcemanager_admin_port }}"
+
+#SCALA
+scala_playbook_version: "0.2.0"
+scala_version: "2.12.12"
+scala_version_name: "scala-{{scala_version}}"
+scala_archive_file: "{{scala_version_name}}.tgz"
+scala_download_url: "http://www.scala-lang.org/files/archive/{{scala_archive_file}}"
+
+scala_lib_path: "/usr/share/scala"
+scala_lib_path_target: "{{scala_lib_path}}/{{scala_version_name}}"
+scala_link_target: "/usr/bin"
+
+#SPARK
+spark:
+  temp_dir: /tmp
+  version: 3.0.1
+  hadoop_version: 3.2
+  working_dir: /usr/local/spark
+  install_dir: /usr/local/spark
+  master_work_port: 7077 
+  worker_work_port: 7078
+  master_ui_port: 8080
+  worker_ui_port: 8081
+  mirror: http://www-us.apache.org/dist/spark
+
+zookeepers: []

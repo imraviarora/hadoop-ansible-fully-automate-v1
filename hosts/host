@@ -7,3 +7,15 @@ dn2
 mn1
 dn1
 dn2
+[masters]
+mn1
+[zookeepers]
+mn1
+[spark-masters]
+mn1
+[slaves]
+dn1
+dn2
+[spark-workers]
+dn1
+dn2
