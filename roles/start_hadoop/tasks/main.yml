@@ -1,0 +1,9 @@
+---
+- name: Formatting Hadoop NameNode
+  command: hadoop namenode -format
+
+- name: Start All Hadoop Services
+  command: start-all.sh
+
+- name: Checking hadoop version
+  command: hadoop version

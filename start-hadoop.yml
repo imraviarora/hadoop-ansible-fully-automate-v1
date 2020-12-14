@@ -1,0 +1,10 @@
+- hosts: master 
+  remote_user: hadoop
+  vars_files:
+  roles:
+    - start_hadoop
+
+- hosts: all 
+  remote_user: hadoop
+  roles:
+    - check_hadoop
